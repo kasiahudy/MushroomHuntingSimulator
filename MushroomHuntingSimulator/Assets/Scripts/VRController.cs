@@ -76,13 +76,12 @@ public class VRController : MonoBehaviour
     {
         if (NotMoving())
             ResetSpeed();
-        if (ButtonPressed())
-            ApplyMovement(CalculateMovement());
+        ApplyMovement(CalculateMovement());
     }
 
     private bool NotMoving()
     {
-        return movePress.GetStateUp(SteamVR_Input_Sources.Any);
+        return moveValue.axis.magnitude == 0;
     }
 
     private void ResetSpeed()
@@ -102,10 +101,18 @@ public class VRController : MonoBehaviour
 
     private Vector3 CalculateMovement()
     {
-        Quaternion orientation = Quaternion.Euler(new Vector3(0.0f, transform.eulerAngles.y, 0.0f));
-        speed += moveValue.axis.y * sensitivity;
+        Quaternion orientation = CalculateOrientation();
+        speed += moveValue.axis.magnitude * sensitivity;
         speed = Mathf.Clamp(speed, -maxSpeed, maxSpeed);
 
         return Vector3.zero + orientation * (speed * Vector3.forward) * Time.deltaTime;
+    }
+
+    private Quaternion CalculateOrientation()
+    {
+        float rotation = Mathf.Atan2(moveValue.axis.x, moveValue.axis.y);
+        rotation *= Mathf.Rad2Deg;
+
+        return Quaternion.Euler(new Vector3(0.0f, transform.eulerAngles.y + rotation, 0.0f));
     }
 }
