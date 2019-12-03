@@ -12,8 +12,27 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         if (controlMode == ControlMode.VR_SET)
-            GetComponent<PlayerMovementMouseAndKeyboardController>().enabled = false;
+            DisableMouseAndKeyboardMovement();
         else if (controlMode == ControlMode.MOUSE_AND_KEYBOARD)
-            GetComponent<PlayerMovementVRSetController>().enabled = false;
+        {
+            DisableVRSetMovement();
+            DisableHands();
+        }
+    }
+    
+    private void DisableMouseAndKeyboardMovement()
+    {
+        GetComponent<PlayerMovementMouseAndKeyboardController>().enabled = false;
+    }
+
+    private void DisableVRSetMovement()
+    {
+        GetComponent<PlayerMovementVRSetController>().enabled = false;
+    }
+
+    private void DisableHands()
+    {
+        GameObject.Find("LeftHand").SetActive(false);
+        GameObject.Find("RightHand").SetActive(false);
     }
 }
