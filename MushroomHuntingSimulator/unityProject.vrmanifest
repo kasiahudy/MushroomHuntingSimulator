@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.mushroomhuntingsimulator.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "D:\\RW_PROJ\\RW_PROJ\\MushroomHuntingSimulator\\MushroomHuntingSimulator\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "MushroomHuntingSimulator [Testing]"
+        }
+      }
+    }
+  ]
+}
