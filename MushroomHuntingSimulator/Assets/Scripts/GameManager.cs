@@ -1,52 +1,114 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
     [SerializeField]
-    Mushroom[] _mushrooms;
-
+    private int maxPlayerHealthPoints = 100;
     [SerializeField]
-    Transform _root;
-
+    private int initialHealthPointsReductionDelta = 1;
     [SerializeField]
-    int numberOfMushrooms;
+    private int decreaseOfHealthPointsTimeSeconds = 1;
+    [SerializeField]
+    private int increaseOfHealthPointsReductionDeltaTimeSeconds = 60;
 
-    float circleRadius = 250f;
+    private List<Mushroom> mushrooms;
+    private int playerHealthPoints;
+    private int healthPointsReductionDelta;
+    private CountdownTimer decreaseOfHealthPointsTimer = new CountdownTimer();
+    private CountdownTimer increaseOfHealthPointsReductionDeltaTimer = new CountdownTimer();
 
-    // Start is called before the first frame update
+    public void UpdatePlayerHealthPoints(int delta)
+    {
+        playerHealthPoints += delta;
+        CheckPlayerHealth();
+    }
+
+    public void IncreaseHealthPointsReductionDelta(int value)
+    {
+        healthPointsReductionDelta += value;
+    }
+
+    public void DecreaseHealthPointsReductionDelta(int value)
+    {
+        healthPointsReductionDelta -= value;
+    }
+
     void Start()
     {
         SpawnMushrooms();
+        SetInitialParamaterValues();
+        StartTimers();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        DecrementTime();
+        if (increaseOfHealthPointsReductionDeltaTimer.HasEnded())
+        {
+            IncreaseHealthPointsReductionDelta(1);
+            StartIncreaseOfHealthPointsReductionDeltaTimer();
+        }
+        if (decreaseOfHealthPointsTimer.HasEnded())
+        {
+            DecreasePlayerHealthPoints();
+            StartDecreaseOfHealthPointsTimer();
+            Debug.Log(playerHealthPoints); // to delete later
+        }
+        CheckPlayerHealth();
     }
 
-    void SpawnMushrooms()
+    private void SpawnMushrooms()
     {
+        MushroomSpawnManager mushroomSpawnManager = GetComponent<MushroomSpawnManager>();
+        mushroomSpawnManager.SpawnMushrooms();
+        mushrooms = mushroomSpawnManager.GetMushrooms();
+    }
 
-        for (int i = 0; i < numberOfMushrooms / _mushrooms.Length; i++)
-        {
-            foreach (Mushroom mushroom in _mushrooms)
-            {
-                if (Random.value < mushroom.spawnProbability)
-                {
-                    Vector3 rndPos = Random.insideUnitSphere * circleRadius + _root.position;
-                    rndPos.y = 0.227f;
+    private void SetInitialParamaterValues()
+    {
+        playerHealthPoints = maxPlayerHealthPoints;
+        healthPointsReductionDelta = initialHealthPointsReductionDelta;
+    }
 
-                    Mushroom prefab = mushroom;
-                    Instantiate<Mushroom>(prefab, rndPos, Quaternion.identity, _root);
-                }
-            }
-        }
-            
+    private void StartTimers()
+    {
+        StartDecreaseOfHealthPointsTimer();
+        StartIncreaseOfHealthPointsReductionDeltaTimer();
+    }
 
+    private void StartDecreaseOfHealthPointsTimer()
+    {
+        decreaseOfHealthPointsTimer.StartCountdown(decreaseOfHealthPointsTimeSeconds);
+    }
 
+    private void StartIncreaseOfHealthPointsReductionDeltaTimer()
+    {
+        increaseOfHealthPointsReductionDeltaTimer.StartCountdown(increaseOfHealthPointsReductionDeltaTimeSeconds);
+    }
+
+    private void DecrementTime()
+    {
+        decreaseOfHealthPointsTimer.DecrementTime(Time.deltaTime);
+        increaseOfHealthPointsReductionDeltaTimer.DecrementTime(Time.deltaTime);
+    }
+
+    private void DecreasePlayerHealthPoints()
+    {
+        playerHealthPoints -= healthPointsReductionDelta;
+    }
+
+    private void CheckPlayerHealth()
+    {
+        if (playerHealthPoints <= 0)
+            EndGame();
+    }
+
+    private void EndGame()
+    {
+        Debug.Log("Koniec gry");
+        //TODO w tym miejscu implementacja konca gry
     }
 }
