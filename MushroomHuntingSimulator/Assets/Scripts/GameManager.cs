@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Transform _root;
 
+    [SerializeField]
+    int numberOfMushrooms;
+
     float circleRadius = 250f;
 
     // Start is called before the first frame update
@@ -28,7 +31,7 @@ public class GameManager : MonoBehaviour
     void SpawnMushrooms()
     {
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < numberOfMushrooms / _mushrooms.Length; i++)
         {
             foreach (Mushroom mushroom in _mushrooms)
             {

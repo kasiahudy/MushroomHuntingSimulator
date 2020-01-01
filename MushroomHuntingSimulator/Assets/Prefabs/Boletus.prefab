@@ -102,7 +102,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4500322243111366085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3ed0d8998c3fc14aae40aaf84b95df4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a6996ca74df5e04ca25ee3d5280dc64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnProbability: 0.8
