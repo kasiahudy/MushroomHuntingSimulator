@@ -106,3 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnProbability: 0.8
+  affectedPlayerHealthPoints: 0
+  edible: 0
+  effectPrefab: {fileID: 0}

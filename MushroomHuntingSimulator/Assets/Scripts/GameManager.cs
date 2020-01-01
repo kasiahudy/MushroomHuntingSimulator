@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int initialHealthPointsReductionDelta = 1;
     [SerializeField]
-    private int decreaseOfHealthPointsTimeSeconds = 1;
+    private float decreaseOfHealthPointsTimeSeconds = 1.0f;
     [SerializeField]
-    private int increaseOfHealthPointsReductionDeltaTimeSeconds = 60;
+    private float increaseOfHealthPointsReductionDeltaTimeSeconds = 60.0f;
 
     private List<Mushroom> mushrooms;
     private int playerHealthPoints;
@@ -26,14 +26,14 @@ public class GameManager : MonoBehaviour
         CheckPlayerHealth();
     }
 
-    public void IncreaseHealthPointsReductionDelta(int value)
+    public float GetDecreaseOfHealthPointsTimeSeconds()
     {
-        healthPointsReductionDelta += value;
+        return decreaseOfHealthPointsTimeSeconds;
     }
 
-    public void DecreaseHealthPointsReductionDelta(int value)
+    public void SetDecreaseOfHealthPointsTimeSeconds(float decreaseOfHealthPointsTimeSeconds)
     {
-        healthPointsReductionDelta -= value;
+        this.decreaseOfHealthPointsTimeSeconds = decreaseOfHealthPointsTimeSeconds;
     }
 
     void Start()
@@ -98,6 +98,11 @@ public class GameManager : MonoBehaviour
     private void DecreasePlayerHealthPoints()
     {
         playerHealthPoints -= healthPointsReductionDelta;
+    }
+
+    private void IncreaseHealthPointsReductionDelta(int value)
+    {
+        healthPointsReductionDelta += value;
     }
 
     private void CheckPlayerHealth()

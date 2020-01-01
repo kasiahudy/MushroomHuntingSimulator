@@ -6,9 +6,9 @@ public class CountdownTimer
 {
     private float timeLeft = 0.0f;
 
-    public void StartCountdown(int seconds)
+    public void StartCountdown(float seconds)
     {
-        timeLeft = seconds * 1.0f;
+        timeLeft = seconds;
     }
 
     public void DecrementTime(float delta)

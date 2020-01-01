@@ -8,9 +8,11 @@ public class Mushroom : MonoBehaviour
     [SerializeField]
     private float spawnProbability;
     [SerializeField]
-    private int healthPointsDelta;
+    private int affectedPlayerHealthPoints;
     [SerializeField]
     private bool edible;
+    [SerializeField]
+    private GameObject effectPrefab;
 
     private GameManager gameManager;
 
@@ -43,12 +45,13 @@ public class Mushroom : MonoBehaviour
 
     private void AffectPlayerHealthPoints()
     {
-        gameManager.UpdatePlayerHealthPoints(healthPointsDelta);
+        gameManager.UpdatePlayerHealthPoints(affectedPlayerHealthPoints);
     }
 
     private void ActivateEffect()
     {
-        //TODO implement effect functionality
+        if (effectPrefab != null)
+            Instantiate(effectPrefab, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
     private void DestroySelf()
