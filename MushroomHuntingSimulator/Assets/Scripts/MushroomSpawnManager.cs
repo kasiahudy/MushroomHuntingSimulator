@@ -25,7 +25,7 @@ public class MushroomSpawnManager : MonoBehaviour
         {
             foreach (Mushroom mushroomPrefab in _mushroomPrefabs)
             {
-                if (Random.value < mushroomPrefab.spawnProbability)
+                if (Random.value < mushroomPrefab.GetSpawnProbability())
                 {
                     Vector3 rndPos = Random.insideUnitSphere * circleRadius + _rootPrefab.position;
                     rndPos.y = 0.227f;
