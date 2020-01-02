@@ -8,7 +8,7 @@ public class Mushroom : MonoBehaviour
     [SerializeField]
     private float spawnProbability;
     [SerializeField]
-    private int affectedPlayerHealthPoints;
+    private int playerHealthPointsDelta;
     [SerializeField]
     private bool edible;
     [SerializeField]
@@ -24,6 +24,18 @@ public class Mushroom : MonoBehaviour
     public bool IsEdible()
     {
         return edible;
+    }
+
+    public void AddHighlightForCollection()
+    {
+        Debug.Log("Added highlight");
+        //TODO wlaczenie podswietlenia
+    }
+
+    public void RemoveHighlightForCollection()
+    {
+        Debug.Log("Removed highlight");
+        //TODO wylaczenie podswietlenia
     }
 
     public void Collect()
@@ -45,7 +57,7 @@ public class Mushroom : MonoBehaviour
 
     private void AffectPlayerHealthPoints()
     {
-        gameManager.UpdatePlayerHealthPoints(affectedPlayerHealthPoints);
+        gameManager.UpdatePlayerHealthPoints(playerHealthPointsDelta);
     }
 
     private void ActivateEffect()

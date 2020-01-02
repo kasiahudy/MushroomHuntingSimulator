@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8411657163659965080}
   m_Layer: 0
   m_Name: Truffle
-  m_TagString: Untagged
+  m_TagString: Mushroom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,3 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnProbability: 0.2
+  playerHealthPointsDelta: -20
+  edible: 0
+  effectPrefab: {fileID: 0}

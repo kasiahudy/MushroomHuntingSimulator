@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7067580671486333897}
   m_Layer: 0
   m_Name: Boletus
-  m_TagString: Untagged
+  m_TagString: Mushroom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnProbability: 0.8
-  affectedPlayerHealthPoints: 0
+  playerHealthPointsDelta: -10
   edible: 0
-  effectPrefab: {fileID: 0}
+  effectPrefab: {fileID: 8076203036128244287, guid: 7ea22b6ab28e83446a8b30617ab48efc,
+    type: 3}

@@ -7,17 +7,18 @@ public class IncreaseHealthPointsReductionSpeedEffect : Effect
     [SerializeField]
     private float increasePercent = 50.0f;
 
-    private float initialSpeed;
+    private float timeDelta;
 
     public override void Activate()
     {
-        initialSpeed = gameManager.GetDecreaseOfHealthPointsTimeSeconds();
-        gameManager.SetDecreaseOfHealthPointsTimeSeconds(initialSpeed + initialSpeed * increasePercent);
+        float initial = gameManager.GetDecreaseOfHealthPointsTimeSeconds();
+        timeDelta = initial * increasePercent * 0.01f ;
+        gameManager.SetDecreaseOfHealthPointsTimeSeconds(initial - timeDelta);
     }
 
     public override void Deactivate()
     {
-        gameManager.SetDecreaseOfHealthPointsTimeSeconds(initialSpeed);
+        gameManager.SetDecreaseOfHealthPointsTimeSeconds(gameManager.GetDecreaseOfHealthPointsTimeSeconds() + timeDelta);
     }
 
     public override bool IsNegative()
