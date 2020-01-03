@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class GameManager : MonoBehaviour
     private float decreaseOfHealthPointsTimeSeconds = 1.0f;
     [SerializeField]
     private float increaseOfHealthPointsReductionDeltaTimeSeconds = 60.0f;
+
+    [SerializeField]
+    private Transform healthBar;
+    [SerializeField]
+    private GameObject healthBarTextObject;
+    private Text healthBarText;
 
     private List<Mushroom> mushrooms;
     private int playerHealthPoints;
@@ -41,6 +48,7 @@ public class GameManager : MonoBehaviour
         SpawnMushrooms();
         SetInitialParamaterValues();
         StartTimers();
+        healthBarText = healthBarTextObject.GetComponent<Text>();
     }
 
     void Update()
@@ -56,8 +64,15 @@ public class GameManager : MonoBehaviour
             DecreasePlayerHealthPoints();
             StartDecreaseOfHealthPointsTimer();
             Debug.Log(playerHealthPoints); // to delete later
+            ChangeHealthBar();
         }
         CheckPlayerHealth();
+    }
+
+    private void ChangeHealthBar()
+    {
+        healthBar.localScale = new Vector3(playerHealthPoints / (float)maxPlayerHealthPoints, 1, 1);
+        healthBarText.text = playerHealthPoints + "/" + maxPlayerHealthPoints;
     }
 
     private void SpawnMushrooms()

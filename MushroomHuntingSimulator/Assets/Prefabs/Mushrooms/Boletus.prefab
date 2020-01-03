@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnProbability: 0.8
   playerHealthPointsDelta: 5
-  edible: 0
+  edible: 1
   effectPrefab: {fileID: 0}
 --- !u!65 &5521757432666990343
 BoxCollider:
