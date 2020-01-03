@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
     private Transform healthBar;
     [SerializeField]
     private GameObject healthBarTextObject;
-    private Text healthBarText;
+    private TextMeshProUGUI healthBarText;
 
     private List<Mushroom> mushrooms;
     private int playerHealthPoints;
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
     public void UpdatePlayerHealthPoints(int delta)
     {
         playerHealthPoints += delta;
+        if (playerHealthPoints > maxPlayerHealthPoints)
+            playerHealthPoints = maxPlayerHealthPoints;
         CheckPlayerHealth();
     }
 
@@ -48,7 +51,7 @@ public class GameManager : MonoBehaviour
         SpawnMushrooms();
         SetInitialParamaterValues();
         StartTimers();
-        healthBarText = healthBarTextObject.GetComponent<Text>();
+        LoadHealthBarText();
     }
 
     void Update()
@@ -63,16 +66,9 @@ public class GameManager : MonoBehaviour
         {
             DecreasePlayerHealthPoints();
             StartDecreaseOfHealthPointsTimer();
-            Debug.Log(playerHealthPoints); // to delete later
-            ChangeHealthBar();
+            UpdateHealthBar();
         }
         CheckPlayerHealth();
-    }
-
-    private void ChangeHealthBar()
-    {
-        healthBar.localScale = new Vector3(playerHealthPoints / (float)maxPlayerHealthPoints, 1, 1);
-        healthBarText.text = playerHealthPoints + "/" + maxPlayerHealthPoints;
     }
 
     private void SpawnMushrooms()
@@ -104,6 +100,11 @@ public class GameManager : MonoBehaviour
         increaseOfHealthPointsReductionDeltaTimer.StartCountdown(increaseOfHealthPointsReductionDeltaTimeSeconds);
     }
 
+    private void LoadHealthBarText()
+    {
+        healthBarText = healthBarTextObject.GetComponent<TextMeshProUGUI>();
+    }
+
     private void DecrementTime()
     {
         decreaseOfHealthPointsTimer.DecrementTime(Time.deltaTime);
@@ -118,6 +119,23 @@ public class GameManager : MonoBehaviour
     private void IncreaseHealthPointsReductionDelta(int value)
     {
         healthPointsReductionDelta += value;
+    }
+
+    private void UpdateHealthBar()
+    {
+        healthBar.localScale = new Vector3(playerHealthPoints / (float)maxPlayerHealthPoints, 1, 1);
+        healthBarText.text = playerHealthPoints + "/" + maxPlayerHealthPoints;
+        healthBar.GetComponent<Image>().color = GetFittingHealthBarColor();
+    }
+
+    private Color GetFittingHealthBarColor()
+    {
+        if (playerHealthPoints > 50)
+            return new Color(0.0f, 1.0f, 0.0f);
+        else if (playerHealthPoints > 20)
+            return new Color(1.0f, 1.0f, 0.0f);
+        else
+            return new Color(1.0f, 0.0f, 0.0f);
     }
 
     private void CheckPlayerHealth()
