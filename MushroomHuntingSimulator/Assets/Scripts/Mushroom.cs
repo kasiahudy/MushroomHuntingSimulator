@@ -15,7 +15,6 @@ public class Mushroom : MonoBehaviour
     private GameObject effectPrefab;
 
     private GameManager gameManager;
-
     private Material mat;
 
     public float GetSpawnProbability()
@@ -53,7 +52,6 @@ public class Mushroom : MonoBehaviour
         LoadGameManager();
         Renderer renderer = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>();
         mat = renderer.material;
-
     }
 
     private void LoadGameManager()
