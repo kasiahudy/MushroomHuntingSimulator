@@ -57,6 +57,7 @@ public class MushroomCollectionKeyboardAndMouseController : MonoBehaviour
 
     private void RemoveHighlightFromCurrent()
     {
-        current.gameObject.GetComponent<Mushroom>().RemoveHighlightForCollection();
+        if (current != null)
+            current.gameObject.GetComponent<Mushroom>().RemoveHighlightForCollection();
     }
 }
