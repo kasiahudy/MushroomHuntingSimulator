@@ -16,6 +16,8 @@ public class Mushroom : MonoBehaviour
 
     private GameManager gameManager;
 
+    private Material mat;
+
     public float GetSpawnProbability()
     {
         return spawnProbability;
@@ -29,13 +31,14 @@ public class Mushroom : MonoBehaviour
     public void AddHighlightForCollection()
     {
         Debug.Log("Added highlight");
-        //TODO wlaczenie podswietlenia
+        Color grey = new Color(0.2f, 0.2f, 0.2f, 1);
+        mat.SetColor("_EmissionColor", grey);
     }
 
     public void RemoveHighlightForCollection()
     {
         Debug.Log("Removed highlight");
-        //TODO wylaczenie podswietlenia
+        mat.SetColor("_EmissionColor", Color.black);
     }
 
     public void Collect()
@@ -48,6 +51,9 @@ public class Mushroom : MonoBehaviour
     void Start()
     {
         LoadGameManager();
+        Renderer renderer = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>();
+        mat = renderer.material;
+
     }
 
     private void LoadGameManager()

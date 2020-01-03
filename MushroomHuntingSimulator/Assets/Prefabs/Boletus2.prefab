@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7788179583542007722}
   - component: {fileID: 7067580671486333897}
   m_Layer: 0
-  m_Name: Boletus
+  m_Name: Boletus2
   m_TagString: Mushroom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

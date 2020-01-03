@@ -28,7 +28,7 @@ public class MushroomSpawnManager : MonoBehaviour
                 if (Random.value < mushroomPrefab.GetSpawnProbability())
                 {
                     Vector3 rndPos = Random.insideUnitSphere * circleRadius + _rootPrefab.position;
-                    rndPos.y = 0.227f;
+                    rndPos.y = 0.0f;
 
                     Mushroom mushroom = Instantiate<Mushroom>(mushroomPrefab, rndPos, Quaternion.identity, _rootPrefab);
                     mushrooms.Add(mushroom);

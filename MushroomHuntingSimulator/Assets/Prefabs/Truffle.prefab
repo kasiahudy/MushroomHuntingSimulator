@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a6996ca74df5e04ca25ee3d5280dc64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnProbability: 0.2
+  spawnProbability: 0.1
   playerHealthPointsDelta: -20
   edible: 0
   effectPrefab: {fileID: 0}
