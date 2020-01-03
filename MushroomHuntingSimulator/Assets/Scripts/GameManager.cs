@@ -155,12 +155,15 @@ public class GameManager : MonoBehaviour
 
     private Color GetFittingHealthBarColor()
     {
-        if (playerHealthPoints >= 50)
-            return new Color(0.0f, 1.0f, 0.0f);
-        else if (playerHealthPoints >= 20)
-            return new Color(1.0f, 1.0f, 0.0f);
+        float halfOfPlayerHealthPoints = maxPlayerHealthPoints / 2;
+        if ((float)playerHealthPoints > halfOfPlayerHealthPoints)
+        {
+            return new Color(-((float)playerHealthPoints - (float)maxPlayerHealthPoints) / halfOfPlayerHealthPoints, 1.0f, 0.0f);
+        }
         else
-            return new Color(1.0f, 0.0f, 0.0f);
+        {
+            return new Color(1.0f, (float)playerHealthPoints / halfOfPlayerHealthPoints, 0.0f);
+        }
     }
 
     private void CheckIfPlayerDied()
