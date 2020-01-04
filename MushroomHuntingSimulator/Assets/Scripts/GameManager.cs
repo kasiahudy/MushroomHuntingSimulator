@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float increaseOfHealthPointsReductionDeltaTimeSeconds = 60.0f;
     [SerializeField]
+    private GameObject player;
+    [SerializeField]
     private Transform healthBar;
     [SerializeField]
     private GameObject healthBarTextObject;
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
     private List<Mushroom> mushrooms;
     private int playerHealthPoints;
     private int healthPointsReductionDelta;
+    private bool gameEnded;
     private Stoper timePassedStoper = new Stoper();
     private CountdownTimer decreaseOfHealthPointsTimer = new CountdownTimer();
     private CountdownTimer increaseOfHealthPointsReductionDeltaTimer = new CountdownTimer();
@@ -51,31 +54,46 @@ public class GameManager : MonoBehaviour
         this.decreaseOfHealthPointsTimeSeconds = decreaseOfHealthPointsTimeSeconds;
     }
 
+    public void RestartGame()
+    {
+        if (gameEnded)
+        {
+            DestroyAllMushrooms();
+            ClearGameOverInfoText();
+            ReactivatePlayerControl();
+            InitGame();
+        }
+    }
+
     void Start()
     {
-        SpawnMushrooms();
-        SetInitialParamaterValues();
-        StartTimeMeasurement();
         LoadHealthBarText();
         LoadGameOverInfoText();
+        InitGame();
     }
 
     void Update()
     {
-        IncrementTimeForStopers();
-        DecrementTimeForCountdownTimers();
-        if (increaseOfHealthPointsReductionDeltaTimer.HasEnded())
-        {
-            IncreaseHealthPointsReductionDelta(1);
-            StartIncreaseOfHealthPointsReductionDeltaTimer();
-        }
-        if (decreaseOfHealthPointsTimer.HasEnded())
-        {
-            DecreasePlayerHealthPoints();
-            StartDecreaseOfHealthPointsTimer();
-        }
-        UpdateHealthBar();
-        CheckIfPlayerDied();
+        if (!gameEnded)
+            PerformInGameManagement();
+    }
+
+    private void LoadHealthBarText()
+    {
+        healthBarText = healthBarTextObject.GetComponent<TextMeshProUGUI>();
+    }
+
+    private void LoadGameOverInfoText()
+    {
+        gameOverInfoText = gameOverInfoTextObject.GetComponent<TextMeshProUGUI>();
+    }
+
+    private void InitGame()
+    {
+        SpawnMushrooms();
+        SetInitialParamaterValues();
+        StartTimeMeasurement();
+        gameEnded = false;
     }
 
     private void SpawnMushrooms()
@@ -113,19 +131,27 @@ public class GameManager : MonoBehaviour
         increaseOfHealthPointsReductionDeltaTimer.StartCountdown(increaseOfHealthPointsReductionDeltaTimeSeconds);
     }
 
-    private void LoadHealthBarText()
-    {
-        healthBarText = healthBarTextObject.GetComponent<TextMeshProUGUI>();
-    }
-
-    private void LoadGameOverInfoText()
-    {
-        gameOverInfoText = gameOverInfoTextObject.GetComponent<TextMeshProUGUI>();
-    }
-
     private void IncrementTimeForStopers()
     {
         timePassedStoper.IncrementTime(Time.deltaTime);
+    }
+
+    private void PerformInGameManagement()
+    {
+        IncrementTimeForStopers();
+        DecrementTimeForCountdownTimers();
+        if (increaseOfHealthPointsReductionDeltaTimer.HasEnded())
+        {
+            IncreaseHealthPointsReductionDelta(1);
+            StartIncreaseOfHealthPointsReductionDeltaTimer();
+        }
+        if (decreaseOfHealthPointsTimer.HasEnded())
+        {
+            DecreasePlayerHealthPoints();
+            StartDecreaseOfHealthPointsTimer();
+        }
+        UpdateHealthBar();
+        CheckIfPlayerDied();
     }
 
     private void DecrementTimeForCountdownTimers()
@@ -157,13 +183,9 @@ public class GameManager : MonoBehaviour
     {
         float halfOfPlayerHealthPoints = maxPlayerHealthPoints / 2;
         if ((float)playerHealthPoints > halfOfPlayerHealthPoints)
-        {
             return new Color(-((float)playerHealthPoints - (float)maxPlayerHealthPoints) / halfOfPlayerHealthPoints, 1.0f, 0.0f);
-        }
         else
-        {
             return new Color(1.0f, (float)playerHealthPoints / halfOfPlayerHealthPoints, 0.0f);
-        }
     }
 
     private void CheckIfPlayerDied()
@@ -174,7 +196,14 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
-        Debug.Log("Koniec gry");
+        gameEnded = true;
+        DeactivatePlayerControl();
+        ShowGameOverText();
+        // TODO trzeba usunac tu wszystkie aktywne efekty
+    }
+
+    private void ShowGameOverText()
+    {
         gameOverInfoText.text = "Game Over\nYou survived: " + FormatTime(timePassedStoper.GetTimePassed());
     }
 
@@ -191,5 +220,31 @@ public class GameManager : MonoBehaviour
         text += seconds;
 
         return text;
+    }
+
+    private void DeactivatePlayerControl()
+    {
+        PlayerControl playerControl = player.GetComponent<PlayerControl>();
+        playerControl.DeactivateControl();
+        playerControl.ActivateRestartInput();
+    }
+
+    private void DestroyAllMushrooms()
+    {
+        foreach (Mushroom mushroom in mushrooms)
+            if (mushroom != null)
+                Destroy(mushroom.gameObject);
+    }
+
+    private void ClearGameOverInfoText()
+    {
+        gameOverInfoText.text = "";
+    }
+
+    private void ReactivatePlayerControl()
+    {
+        PlayerControl playerControl = player.GetComponent<PlayerControl>();
+        playerControl.ActivateControl();
+        playerControl.DeactivateRestartInput();
     }
 }

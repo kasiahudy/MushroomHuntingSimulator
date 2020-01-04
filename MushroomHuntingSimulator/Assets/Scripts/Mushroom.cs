@@ -29,14 +29,12 @@ public class Mushroom : MonoBehaviour
 
     public void AddHighlightForCollection()
     {
-        Debug.Log("Added highlight");
         Color grey = new Color(0.2f, 0.2f, 0.2f, 1);
         mat.SetColor("_EmissionColor", grey);
     }
 
     public void RemoveHighlightForCollection()
     {
-        Debug.Log("Removed highlight");
         mat.SetColor("_EmissionColor", Color.black);
     }
 

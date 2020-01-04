@@ -21,6 +21,8 @@ public class MushroomSpawnManager : MonoBehaviour
 
     public void SpawnMushrooms()
     {
+        mushrooms.Clear();
+
         for (int i = 0; i < numberOfMushrooms / _mushroomPrefabs.Length; i++)
         {
             foreach (Mushroom mushroomPrefab in _mushroomPrefabs)

@@ -19,6 +19,6 @@ public class Stoper
 
     public void IncrementTime(float delta)
     {
-        timePassed -= delta;
+        timePassed += delta;
     }
 }

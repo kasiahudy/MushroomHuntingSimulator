@@ -50,6 +50,11 @@ public class MushroomCollectionKeyboardAndMouseController : MonoBehaviour
             
     }
 
+    void OnDisable()
+    {
+        current = null;
+    }
+
     private void AddHighlightToCurrent()
     {
         current.gameObject.GetComponent<Mushroom>().AddHighlightForCollection();
