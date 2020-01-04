@@ -54,6 +54,12 @@ public class GameManager : MonoBehaviour
         this.decreaseOfHealthPointsTimeSeconds = decreaseOfHealthPointsTimeSeconds;
     }
 
+    public List<Mushroom> GetMushrooms()
+    {
+        mushrooms.RemoveAll(mushroom => mushroom == null);
+        return mushrooms;
+    }
+
     public void RestartGame()
     {
         if (gameEnded)
@@ -231,9 +237,8 @@ public class GameManager : MonoBehaviour
 
     private void DestroyAllMushrooms()
     {
-        foreach (Mushroom mushroom in mushrooms)
-            if (mushroom != null)
-                Destroy(mushroom.gameObject);
+        GetMushrooms()
+            .ForEach(mushroom => Destroy(mushroom.gameObject));
     }
 
     private void ClearGameOverInfoText()

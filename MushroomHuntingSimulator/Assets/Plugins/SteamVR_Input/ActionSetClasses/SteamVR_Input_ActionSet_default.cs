@@ -105,11 +105,27 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Boolean CollectMushroomPress
+        {
+            get
+            {
+                return SteamVR_Actions.default_CollectMushroomPress;
+            }
+        }
+        
         public virtual SteamVR_Action_Vector2 TouchpadPosition
         {
             get
             {
                 return SteamVR_Actions.default_TouchpadPosition;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean RestartGame
+        {
+            get
+            {
+                return SteamVR_Actions.default_RestartGame;
             }
         }
         
