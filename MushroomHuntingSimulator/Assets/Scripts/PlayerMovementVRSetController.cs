@@ -18,6 +18,17 @@ public class PlayerMovementVRSetController : MonoBehaviour
     private Transform cameraRig;
     private Transform head;
     private float speed = 0.0f;
+    private bool walkingEnabled = true;
+
+    public void EnableWalkingMovement()
+    {
+        walkingEnabled = true;
+    }
+
+    public void DisableWalkingMovement()
+    {
+        walkingEnabled = false;
+    }
 
     private void Awake()
     {
@@ -34,7 +45,7 @@ public class PlayerMovementVRSetController : MonoBehaviour
     {
         HandleHead();
         HandleHeight();
-        HandleMovement();
+        HandleWalking();
     }
 
     private void HandleHead()
@@ -72,11 +83,14 @@ public class PlayerMovementVRSetController : MonoBehaviour
         characterController.center = newCenter;
     }
 
-    private void HandleMovement()
+    private void HandleWalking()
     {
-        if (NotMoving())
-            ResetSpeed();
-        ApplyMovement(CalculateMovement());
+        if (walkingEnabled)
+        {
+            if (NotMoving())
+                ResetSpeed();
+            ApplyMovement(CalculateMovement());
+        }
     }
 
     private bool NotMoving()
