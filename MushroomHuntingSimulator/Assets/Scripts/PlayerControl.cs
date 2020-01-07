@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ControlMode { VR_SET, KEYBOARD_AND_MOUSE }
+
 
 public class PlayerControl : MonoBehaviour
 {
