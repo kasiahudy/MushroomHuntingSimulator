@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8477509687647086179}
   - component: {fileID: 5048924360190081347}
   - component: {fileID: 6990980859121074184}
+  - component: {fileID: 1774707732520967684}
   m_Layer: 0
   m_Name: LibertyCap
   m_TagString: Mushroom
@@ -62,6 +63,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.57, y: 1, z: 0.52}
   m_Center: {x: 0.07, y: 0.5, z: 0.09}
+--- !u!54 &1774707732520967684
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2584863877115248322}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4342517723699294244
 GameObject:
   m_ObjectHideFlags: 0

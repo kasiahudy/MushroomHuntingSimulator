@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -63,12 +64,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         if (gameEnded)
-        {
-            DestroyAllMushrooms();
-            ClearGameOverInfoText();
-            ReactivatePlayerControl();
-            InitGame();
-        }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void Start()
@@ -233,23 +229,5 @@ public class GameManager : MonoBehaviour
         PlayerControl playerControl = player.GetComponent<PlayerControl>();
         playerControl.DeactivateControl();
         playerControl.ActivateRestartInput();
-    }
-
-    private void DestroyAllMushrooms()
-    {
-        GetMushrooms()
-            .ForEach(mushroom => Destroy(mushroom.gameObject));
-    }
-
-    private void ClearGameOverInfoText()
-    {
-        gameOverInfoText.text = "";
-    }
-
-    private void ReactivatePlayerControl()
-    {
-        PlayerControl playerControl = player.GetComponent<PlayerControl>();
-        playerControl.ActivateControl();
-        playerControl.DeactivateRestartInput();
     }
 }

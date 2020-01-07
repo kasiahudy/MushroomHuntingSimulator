@@ -27,7 +27,8 @@ public class MushroomCollectionVRSetController : MonoBehaviour
         if (other.gameObject.CompareTag(collectableMushroomTag))
         {
             currentMushroom = other.gameObject;
-            AddHighlightForCurrentMushroom();               
+            Debug.Log(currentMushroom.name);
+            AddHighlightForCurrentMushroom();
         }
     }
 
@@ -50,11 +51,9 @@ public class MushroomCollectionVRSetController : MonoBehaviour
         currentMushroom.GetComponent<Mushroom>().Collect();
     }
 
-
     private void AddHighlightForCurrentMushroom()
     {
         currentMushroom.GetComponent<Mushroom>().AddHighlightForCollection();
-
     }
 
     private void RemoveHighlightForCurrentMushroom()

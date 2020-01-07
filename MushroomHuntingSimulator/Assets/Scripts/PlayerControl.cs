@@ -9,20 +9,6 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     private ControlMode controlMode;
 
-    public void ActivateControl()
-    {
-        if (controlMode == ControlMode.KEYBOARD_AND_MOUSE)
-        {
-            EnableKeyboardAndMouseMovement();
-            EnableMushroomCollectionKeyboardAndMouse();
-        }
-        else if (controlMode == ControlMode.VR_SET)
-        {
-            EnableVRSetWalking();
-            EnableMushroomCollectionVRSet();
-        }
-    }
-
     public void DeactivateControl()
     {
         if (controlMode == ControlMode.KEYBOARD_AND_MOUSE)
@@ -45,14 +31,6 @@ public class PlayerControl : MonoBehaviour
             EnableRestartGameVRSet();
     }
 
-    public void DeactivateRestartInput()
-    {
-        if (controlMode == ControlMode.KEYBOARD_AND_MOUSE)
-            DisableRestartGameKeyboardAndMouse();
-        else if (controlMode == ControlMode.VR_SET)
-            DisableRestartGameVRSet();
-    }
-
     private void Start()
     {
         InitMovement();
@@ -71,20 +49,10 @@ public class PlayerControl : MonoBehaviour
             DisableHands();
         }
     }
-
-    private void EnableKeyboardAndMouseMovement()
-    {
-        GetComponent<PlayerMovementKeyboardAndMouseController>().enabled = true;
-    }
     
     private void DisableKeyboardAndMouseMovement()
     {
         GetComponent<PlayerMovementKeyboardAndMouseController>().enabled = false;
-    }
-
-    private void EnableMushroomCollectionKeyboardAndMouse()
-    {
-        GetComponent<MushroomCollectionKeyboardAndMouseController>().enabled = true;
     }
     
     private void DisableMushroomCollectionKeyboardAndMouse()
@@ -95,16 +63,6 @@ public class PlayerControl : MonoBehaviour
     private void EnableRestartGameKeyboardAndMouse()
     {
         GetComponent<RestartGameKeyboardAndMouseController>().enabled = true;
-    }
-    
-    private void DisableRestartGameKeyboardAndMouse()
-    {
-        GetComponent<RestartGameKeyboardAndMouseController>().enabled = false;
-    }
-
-    private void EnableVRSetWalking()
-    {
-        GetComponent<PlayerMovementVRSetController>().EnableWalkingMovement();
     }
 
     private void DisableVRSetWalking()
@@ -123,12 +81,6 @@ public class PlayerControl : MonoBehaviour
         GameObject.Find("RightHand").SetActive(false);
     }
 
-    private void EnableMushroomCollectionVRSet()
-    {
-        GameObject.Find("LeftHand").GetComponent<MushroomCollectionVRSetController>().enabled = true;
-        GameObject.Find("RightHand").GetComponent<MushroomCollectionVRSetController>().enabled = true;
-    }
-
     private void DisableMushroomCollectionVRSet()
     {
         GameObject.Find("LeftHand").GetComponent<MushroomCollectionVRSetController>().enabled = false;
@@ -138,10 +90,5 @@ public class PlayerControl : MonoBehaviour
     private void EnableRestartGameVRSet()
     {
         GetComponent<RestartGameVRSetController>().enabled = true;
-    }
-
-    private void DisableRestartGameVRSet()
-    {
-        GetComponent<RestartGameVRSetController>().enabled = false;
     }
 }

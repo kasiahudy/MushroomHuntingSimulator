@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5821910847772382528}
   - component: {fileID: -520761761986316206}
   - component: {fileID: 4707895787371522459}
+  - component: {fileID: 6904260000788781173}
   m_Layer: 0
   m_Name: RedToadstool
   m_TagString: Mushroom
@@ -63,6 +64,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.88, y: 1, z: 0.79}
   m_Center: {x: 0.27, y: 0.39, z: 0.24}
+--- !u!54 &6904260000788781173
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704582600425917037}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7932597564159435596
 GameObject:
   m_ObjectHideFlags: 0
