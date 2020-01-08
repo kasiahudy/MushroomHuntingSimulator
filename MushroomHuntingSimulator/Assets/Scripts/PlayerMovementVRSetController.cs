@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
@@ -19,6 +20,7 @@ public class PlayerMovementVRSetController : MonoBehaviour
     private Transform head;
     private float speed = 0.0f;
     private bool walkingEnabled = true;
+    private Vector3 previousValidPosition;
 
     public void EnableWalkingMovement()
     {
@@ -46,6 +48,11 @@ public class PlayerMovementVRSetController : MonoBehaviour
         HandleHead();
         HandleHeight();
         HandleWalking();
+    }
+
+    private void LateUpdate()
+    {
+        HandleInvalidPosition();
     }
 
     private void HandleHead()
@@ -128,5 +135,13 @@ public class PlayerMovementVRSetController : MonoBehaviour
         rotation *= Mathf.Rad2Deg;
 
         return Quaternion.Euler(new Vector3(0.0f, transform.eulerAngles.y + rotation, 0.0f));
+    }
+
+    private void HandleInvalidPosition()
+    {
+        if (transform.position.y > 0)
+            transform.position = previousValidPosition;
+        else
+            previousValidPosition = transform.position;
     }
 }
