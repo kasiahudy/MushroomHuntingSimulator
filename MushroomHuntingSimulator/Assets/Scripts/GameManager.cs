@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     private float increaseOfHealthPointsReductionDeltaTimeSeconds = 60.0f;
     [SerializeField]
     private GameObject player;
+    [SerializeField]
+    private GameObject controlsManagerObject;
 
     private List<Mushroom> mushrooms;
     private int playerHealthPoints;
@@ -185,8 +187,8 @@ public class GameManager : MonoBehaviour
     
     private void DeactivatePlayerControl()
     {
-        PlayerControl playerControl = player.GetComponent<PlayerControl>();
-        playerControl.DeactivateControl();
-        playerControl.ActivateRestartInput();
+        ControlsManager controlsManager = controlsManagerObject.GetComponent<ControlsManager>();
+        controlsManager.DeactivateControl();
+        controlsManager.ActivateRestartInput();
     }
 }

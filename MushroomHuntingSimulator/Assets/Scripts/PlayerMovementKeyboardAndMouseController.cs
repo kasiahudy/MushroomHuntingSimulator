@@ -27,25 +27,36 @@ public class PlayerMovementKeyboardAndMouseController : MonoBehaviour
     private KeyCode moveRightKey = KeyCode.D;
     [SerializeField]
     private float movementSpeed = 3.0f;
+    [SerializeField]
+    private Camera camera;
 
     private float rotationX = 0.0f;
     private float rotationY = 0.0f;
-    private Quaternion originalRotation;
+    private Vector3 originalPlayerPosition;
+    private Vector3 lastValidPlayerPosition;
+    private Quaternion originalCameraRotation;
 
     private void Start()
     {
-        SaveOriginalRotation();
+        SaveOriginalPlayerPosition();
+        SaveOriginalCameraRotation();
     }
 
     private void Update()
     {
         HandleMouseLook();
         HandleMovement();
+        HandleInvalidPosition();
     }
 
-    private void SaveOriginalRotation()
+    private void SaveOriginalPlayerPosition()
     {
-        originalRotation = transform.rotation;
+        originalPlayerPosition = transform.position;
+    }
+    
+    private void SaveOriginalCameraRotation()
+    {
+        originalCameraRotation = camera.transform.rotation;
     }
 
     private void HandleMouseLook()
@@ -56,7 +67,7 @@ public class PlayerMovementKeyboardAndMouseController : MonoBehaviour
         rotationY = ClampAngle(rotationY, mouseLookMinimumY, mouseLookMaximumY);
         Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
         Quaternion yQuaternion = Quaternion.AngleAxis(rotationY, -Vector3.right);
-        transform.localRotation = originalRotation * xQuaternion * yQuaternion;
+        camera.transform.localRotation = originalCameraRotation * xQuaternion * yQuaternion;
     }
 
     private float ClampAngle(float angle, float min, float max)
@@ -88,31 +99,52 @@ public class PlayerMovementKeyboardAndMouseController : MonoBehaviour
 
     private void MoveForward()
     {
-        Vector3 moveDirection = transform.forward;
-        moveDirection.y = 0;
-        transform.position += moveDirection * movementSpeed * Time.deltaTime;
+        Vector3 direction = transform.forward;
+        MovePlayerByVector(CalculateMovementVectorWithDirection(direction));
     }
 
     private void MoveBackward()
     {
-        Vector3 moveDirection = -transform.forward;
-        moveDirection.y = 0;
-        transform.position += moveDirection * movementSpeed * Time.deltaTime;
+        Vector3 direction = -transform.forward;
+        MovePlayerByVector(CalculateMovementVectorWithDirection(direction));
     }
 
     private void MoveLeft()
     {
-        Vector3 moveDirection = transform.forward;
-        moveDirection.y = 0;
-        moveDirection = Vector3.Cross(moveDirection, Vector3.up).normalized;
-        transform.position += moveDirection * movementSpeed * Time.deltaTime;
+        Vector3 direction = transform.forward;
+        direction.y = 0;
+        direction = Vector3.Cross(direction, Vector3.up).normalized;
+        MovePlayerByVector(CalculateMovementVectorWithDirection(direction));
     }
 
     private void MoveRight()
     {
-        Vector3 moveDirection = -transform.forward;
-        moveDirection.y = 0;
-        moveDirection = Vector3.Cross(moveDirection, Vector3.up).normalized;
-        transform.position += moveDirection * movementSpeed * Time.deltaTime;
+        Vector3 direction = -transform.forward;
+        direction.y = 0;
+        direction = Vector3.Cross(direction, Vector3.up).normalized;
+        MovePlayerByVector(CalculateMovementVectorWithDirection(direction));
+    }
+
+    private Vector3 CalculateMovementVectorWithDirection(Vector3 direction)
+    {
+        return Vector3.zero + GetCameraOrientation() * (movementSpeed * direction) * Time.deltaTime;
+    }
+
+    private Quaternion GetCameraOrientation()
+    {
+        return Quaternion.Euler(new Vector3(0.0f, camera.transform.eulerAngles.y, 0.0f));
+    }
+
+    private void MovePlayerByVector(Vector3 movementVector)
+    {
+        GetComponent<CharacterController>().Move(movementVector);
+    }
+
+    private void HandleInvalidPosition()
+    {
+        if (transform.position.y != originalPlayerPosition.y)
+            transform.position = lastValidPlayerPosition;
+        else
+            lastValidPlayerPosition = transform.position;
     }
 }
