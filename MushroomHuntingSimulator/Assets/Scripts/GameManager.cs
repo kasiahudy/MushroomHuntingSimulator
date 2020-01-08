@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     [SerializeField]
     private GameObject controlsManagerObject;
+    [SerializeField]
+    private string effectTag = "Effect";
 
     private List<Mushroom> mushrooms;
     private int playerHealthPoints;
@@ -182,13 +184,20 @@ public class GameManager : MonoBehaviour
     {
         gameEnded = true;
         DeactivatePlayerControl();
-        // TODO trzeba usunac tu wszystkie aktywne efekty
+        RemoveAllActiveEffects();
     }
-    
+
     private void DeactivatePlayerControl()
     {
         ControlsManager controlsManager = controlsManagerObject.GetComponent<ControlsManager>();
         controlsManager.DeactivateControl();
         controlsManager.ActivateRestartInput();
+    }
+
+    private void RemoveAllActiveEffects()
+    {
+        var effects = GameObject.FindGameObjectsWithTag(effectTag);
+        foreach (var effect in effects)
+            Destroy(effect);
     }
 }

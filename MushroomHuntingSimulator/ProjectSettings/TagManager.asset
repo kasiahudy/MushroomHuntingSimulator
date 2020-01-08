@@ -7,6 +7,7 @@ TagManager:
   - Mushroom
   - projectile
   - FxTemporaire
+  - Effect
   layers:
   - Default
   - TransparentFX
