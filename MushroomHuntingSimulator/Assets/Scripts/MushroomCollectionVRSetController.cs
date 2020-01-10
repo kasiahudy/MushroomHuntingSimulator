@@ -24,17 +24,17 @@ public class MushroomCollectionVRSetController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(collectableMushroomTag))
+        if (CollidedWithMushroom(other))
         {
             currentMushroom = other.gameObject;
-            Debug.Log(currentMushroom.name);
             AddHighlightForCurrentMushroom();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (currentMushroom != null)
+        //TODO prawdopodobnie rozwiaze to problemy z naglym zanikiem zaznaczenia, przetestowac w labie
+        if (currentMushroom != null && CollidedWithMushroom(other))
         {
             RemoveHighlightForCurrentMushroom();
             currentMushroom = null;
@@ -49,6 +49,11 @@ public class MushroomCollectionVRSetController : MonoBehaviour
     private void CollectCurrentMushroom()
     {
         currentMushroom.GetComponent<Mushroom>().Collect();
+    }
+
+    private bool CollidedWithMushroom(Collider collider)
+    {
+        return collider.gameObject.CompareTag(collectableMushroomTag)
     }
 
     private void AddHighlightForCurrentMushroom()
