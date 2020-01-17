@@ -34,11 +34,31 @@ public class MushroomCollectInfo : MonoBehaviour
     public void setHealthPointDeltaInfo(int info)
     {
         durationTimer.StartCountdown(durationSeconds);
-        healthPointDeltaInfo.text = "xxx: " + info;
+
+        string finalText = "";
+        if (info < 0)
+        {
+            healthPointDeltaInfo.color = new Color32(255, 0, 0, 255);
+            finalText = info.ToString();
+        }
+        else
+        {
+            healthPointDeltaInfo.color = new Color32(0, 255, 0, 255);
+            finalText = "+" + info.ToString();
+        }
+        healthPointDeltaInfo.text = finalText;
     }
 
-    public void setEffectInfo(string info)
+    public void setEffectInfo(string info, bool isNegative)
     {
+        if (isNegative)
+        {
+            effectInfo.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            effectInfo.color = new Color32(0, 255, 0, 255);
+        }
         durationTimer.StartCountdown(durationSeconds);
         effectInfo.text = info;
     }

@@ -26,6 +26,10 @@ public class Effect : MonoBehaviour, IEffect
         LoadGameManager();
         Activate();
         StartTimer();
+    }
+
+    void Awake()
+    {
         mushroomCollectInfo = GameObject.Find("MushroomCollectInfo").GetComponent<MushroomCollectInfo>();
     }
 

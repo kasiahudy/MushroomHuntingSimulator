@@ -53,7 +53,7 @@ public class MushroomCollectionVRSetController : MonoBehaviour
 
     private bool CollidedWithMushroom(Collider collider)
     {
-        return collider.gameObject.CompareTag(collectableMushroomTag)
+        return collider.gameObject.CompareTag(collectableMushroomTag);
     }
 
     private void AddHighlightForCurrentMushroom()
