@@ -200,4 +200,16 @@ public class GameManager : MonoBehaviour
         foreach (var effect in effects)
             Destroy(effect);
     }
+
+    public void RemoveAllNegativeEffects()
+    {
+        var effects = GameObject.FindGameObjectsWithTag(effectTag);
+        foreach (var effect in effects)
+        {
+            if (effect.GetComponent<Effect>().IsNegative())
+            {
+                Destroy(effect);
+            }
+        }
+    }
 }

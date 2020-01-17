@@ -40,6 +40,11 @@ public class Effect : MonoBehaviour, IEffect
             EndEffect();
     }
 
+    void OnDestroy()
+    {
+        EndEffect();
+    }
+
     private void LoadGameManager()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -70,4 +75,6 @@ public class Effect : MonoBehaviour, IEffect
     {
         Destroy(this.gameObject);
     }
+
+    
 }

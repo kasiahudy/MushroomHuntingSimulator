@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddLightFogEffect : Effect
+public class RemoveAllNegativeEffectsEffect : Effect
 {
-    private string effectInfo = "";
+    private string effectInfo = "All negative effects are removed!";
 
     public override void Activate()
     {
-        RenderSettings.fog = true;
+        gameManager.RemoveAllNegativeEffects();
         mushroomCollectInfo.setEffectInfo(effectInfo, IsNegative());
     }
 
@@ -19,6 +19,6 @@ public class AddLightFogEffect : Effect
 
     public override bool IsNegative()
     {
-        return true;
+        return false;
     }
 }
