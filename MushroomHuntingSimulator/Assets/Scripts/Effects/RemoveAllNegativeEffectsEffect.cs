@@ -14,7 +14,7 @@ public class RemoveAllNegativeEffectsEffect : Effect
 
     public override void Deactivate()
     {
-        RenderSettings.fog = false;
+
     }
 
     public override bool IsNegative()

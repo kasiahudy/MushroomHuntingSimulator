@@ -127,7 +127,8 @@ MonoBehaviour:
   spawnProbability: 0.1
   playerHealthPointsDelta: 50
   edible: 1
-  effectPrefab: {fileID: 0}
+  effectPrefab: {fileID: 5714272696705938260, guid: 8b664f40453e98f46ae045abca1a7f9f,
+    type: 3}
 --- !u!65 &7934791113704666419
 BoxCollider:
   m_ObjectHideFlags: 0

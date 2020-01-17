@@ -9,6 +9,7 @@ public class Mushroom : MonoBehaviour
     private float spawnProbability;
     [SerializeField]
     private int playerHealthPointsDelta;
+    private int originalPlayerHealthPointsDelta;
     [SerializeField]
     private bool edible;
     [SerializeField]
@@ -26,6 +27,12 @@ public class Mushroom : MonoBehaviour
     public bool IsEdible()
     {
         return edible;
+    }
+
+    public void AddStrongHighlightForCollection()
+    {
+        Color grey = new Color(0.2f, 0.4f, 0.2f, 1);
+        mat.SetColor("_EmissionColor", grey);
     }
 
     public void AddHighlightForCollection()
@@ -52,6 +59,7 @@ public class Mushroom : MonoBehaviour
         Renderer renderer = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>();
         mat = renderer.material;
         mushroomCollectInfo = GameObject.Find("MushroomCollectInfo").GetComponent<MushroomCollectInfo>();
+        originalPlayerHealthPointsDelta = playerHealthPointsDelta;
     }
 
     private void LoadGameManager()
@@ -74,5 +82,15 @@ public class Mushroom : MonoBehaviour
     private void DestroySelf()
     {
         Destroy(this.gameObject);
+    }
+
+    public void changePlayerHealthPointsDelta(float changePercent)
+    {
+        playerHealthPointsDelta = (int)(playerHealthPointsDelta * changePercent);
+    }
+
+    public void returnToOriginalPlayerHealthPointsDelta()
+    {
+        playerHealthPointsDelta = originalPlayerHealthPointsDelta;
     }
 }
