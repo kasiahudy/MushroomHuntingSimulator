@@ -16,6 +16,7 @@ public class Mushroom : MonoBehaviour
 
     private GameManager gameManager;
     private Material mat;
+    private MushroomCollectInfo mushroomCollectInfo;
 
     public float GetSpawnProbability()
     {
@@ -50,6 +51,7 @@ public class Mushroom : MonoBehaviour
         LoadGameManager();
         Renderer renderer = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>();
         mat = renderer.material;
+        mushroomCollectInfo = GameObject.Find("MushroomCollectInfo").GetComponent<MushroomCollectInfo>();
     }
 
     private void LoadGameManager()
@@ -59,6 +61,7 @@ public class Mushroom : MonoBehaviour
 
     private void AffectPlayerHealthPoints()
     {
+        mushroomCollectInfo.setHealthPointDeltaInfo(playerHealthPointsDelta);
         gameManager.UpdatePlayerHealthPoints(playerHealthPointsDelta);
     }
 

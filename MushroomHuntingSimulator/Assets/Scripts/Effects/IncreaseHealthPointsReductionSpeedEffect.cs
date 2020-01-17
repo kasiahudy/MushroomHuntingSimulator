@@ -9,11 +9,14 @@ public class IncreaseHealthPointsReductionSpeedEffect : Effect
 
     private float timeDelta;
 
+    private string effectInfo = "effect info";
+
     public override void Activate()
     {
         float initial = gameManager.GetDecreaseOfHealthPointsTimeSeconds();
         timeDelta = initial * increasePercent * 0.01f ;
         gameManager.SetDecreaseOfHealthPointsTimeSeconds(initial - timeDelta);
+        mushroomCollectInfo.setEffectInfo(effectInfo);
     }
 
     public override void Deactivate()

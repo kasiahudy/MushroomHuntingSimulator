@@ -9,6 +9,7 @@ public class Effect : MonoBehaviour, IEffect
     protected float durationSeconds = 10.0f;
 
     protected GameManager gameManager;
+    protected MushroomCollectInfo mushroomCollectInfo;
     protected CountdownTimer durationTimer = new CountdownTimer();
 
     public virtual void Activate() {}
@@ -25,6 +26,7 @@ public class Effect : MonoBehaviour, IEffect
         LoadGameManager();
         Activate();
         StartTimer();
+        mushroomCollectInfo = GameObject.Find("MushroomCollectInfo").GetComponent<MushroomCollectInfo>();
     }
 
     void Update()
