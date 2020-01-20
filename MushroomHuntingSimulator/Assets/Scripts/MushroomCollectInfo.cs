@@ -36,7 +36,7 @@ public class MushroomCollectInfo : MonoBehaviour
         durationTimer.StartCountdown(durationSeconds);
 
         string finalText = "";
-        if (info < 0)
+        if (info <= 0)
         {
             healthPointDeltaInfo.color = new Color32(255, 0, 0, 255);
             finalText = info.ToString();

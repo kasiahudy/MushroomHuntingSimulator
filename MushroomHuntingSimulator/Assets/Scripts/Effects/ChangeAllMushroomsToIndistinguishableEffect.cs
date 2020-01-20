@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HighlightEdibleMushroomsEffect : Effect
+public class ChangeAllMushroomsToIndistinguishableEffect : Effect
 {
     private List<Mushroom> mushrooms;
-    private string effectInfo = "All edible mushrooms are hightlighted!";
+    private string effectInfo = "Mushrooms are indistinguishable!";
 
     public override void Activate()
     {
         mushrooms = gameManager.GetMushrooms();
         foreach (var mushroom in mushrooms)
         {
-            if (mushroom.IsEdible())
-            {
-                mushroom.AddStrongHighlightForCollection();
-            }
+            mushroom.changeMushroomToBasic();
         }
         mushroomCollectInfo.setEffectInfo(effectInfo, IsNegative());
     }
@@ -24,15 +21,15 @@ public class HighlightEdibleMushroomsEffect : Effect
     {
         foreach (var mushroom in mushrooms)
         {
-            if (mushroom.IsEdible() && mushroom != null)
+            if (mushroom != null)
             {
-                mushroom.RemoveHighlightForCollection();
+                mushroom.changeMushroomToOriginal();
             }
         }
     }
 
     public override bool IsNegative()
     {
-        return false;
+        return true;
     }
 }

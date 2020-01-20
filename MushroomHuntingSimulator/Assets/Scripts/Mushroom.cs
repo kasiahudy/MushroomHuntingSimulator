@@ -15,8 +15,11 @@ public class Mushroom : MonoBehaviour
     [SerializeField]
     private GameObject effectPrefab;
 
+    public GameObject mainMushroom;
+    public GameObject basicMushroom;
+
     private GameManager gameManager;
-    private Material mat;
+    private Material mushroomMaterial;
     private MushroomCollectInfo mushroomCollectInfo;
 
     public float GetSpawnProbability()
@@ -32,18 +35,18 @@ public class Mushroom : MonoBehaviour
     public void AddStrongHighlightForCollection()
     {
         Color grey = new Color(0.2f, 0.4f, 0.2f, 1);
-        mat.SetColor("_EmissionColor", grey);
+        mushroomMaterial.SetColor("_EmissionColor", grey);
     }
 
     public void AddHighlightForCollection()
     {
         Color grey = new Color(0.2f, 0.2f, 0.2f, 1);
-        mat.SetColor("_EmissionColor", grey);
+        mushroomMaterial.SetColor("_EmissionColor", grey);
     }
 
     public void RemoveHighlightForCollection()
     {
-        mat.SetColor("_EmissionColor", Color.black);
+        mushroomMaterial.SetColor("_EmissionColor", Color.black);
     }
 
     public void Collect()
@@ -56,10 +59,15 @@ public class Mushroom : MonoBehaviour
     void Start()
     {
         LoadGameManager();
-        Renderer renderer = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>();
-        mat = renderer.material;
+        SetMushroomMaterial(mainMushroom);
         mushroomCollectInfo = GameObject.Find("MushroomCollectInfo").GetComponent<MushroomCollectInfo>();
         originalPlayerHealthPointsDelta = playerHealthPointsDelta;
+    }
+
+    private void SetMushroomMaterial(GameObject mushroom)
+    {
+        Renderer renderer = mushroom.GetComponent<Renderer>();
+        mushroomMaterial = renderer.material;
     }
 
     private void LoadGameManager()
@@ -92,5 +100,19 @@ public class Mushroom : MonoBehaviour
     public void returnToOriginalPlayerHealthPointsDelta()
     {
         playerHealthPointsDelta = originalPlayerHealthPointsDelta;
+    }
+
+    public void changeMushroomToBasic()
+    {
+        mainMushroom.SetActive(false);
+        basicMushroom.SetActive(true);
+        SetMushroomMaterial(basicMushroom);
+    }
+
+    public void changeMushroomToOriginal()
+    {
+        mainMushroom.SetActive(true);
+        basicMushroom.SetActive(false);
+        SetMushroomMaterial(mainMushroom);
     }
 }
