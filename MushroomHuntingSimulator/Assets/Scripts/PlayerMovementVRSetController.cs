@@ -21,6 +21,7 @@ public class PlayerMovementVRSetController : MonoBehaviour
     private float speed = 0.0f;
     private bool walkingEnabled = true;
     private Vector3 previousValidPosition;
+    private float initialTransformY;
 
     public void EnableWalkingMovement()
     {
@@ -41,6 +42,7 @@ public class PlayerMovementVRSetController : MonoBehaviour
     {
         cameraRig = SteamVR_Render.Top().origin;
         head = SteamVR_Render.Top().head;
+        initialTransformY = transform.position.y;
     }
 
     private void Update()
@@ -139,7 +141,7 @@ public class PlayerMovementVRSetController : MonoBehaviour
 
     private void HandleInvalidPosition()
     {
-        if (transform.position.y > 0)
+        if (transform.position.y != initialTransformY)
             transform.position = previousValidPosition;
         else
             previousValidPosition = transform.position;

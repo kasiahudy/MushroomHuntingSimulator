@@ -12,7 +12,7 @@ public class ControlsManager : MonoBehaviour
     [SerializeField]
     private GameObject vrCameraRig;
     [SerializeField]
-    private Camera keyboardAndMouseCamera;
+    private GameObject keyboardAndMouseCameraObject;
     [SerializeField]
     private GameObject keyboardAndMouseUI;
     [SerializeField]
@@ -62,7 +62,7 @@ public class ControlsManager : MonoBehaviour
 
     private void DisableKeyboardAndMouseCamera()
     {
-        keyboardAndMouseCamera.enabled = false;
+        keyboardAndMouseCameraObject.SetActive(false);
     }
 
     private void DisableKeyboardAndMouseUI()
@@ -98,8 +98,8 @@ public class ControlsManager : MonoBehaviour
 
     private void DisableMushroomCollectionVRSet()
     {
-        player.transform.Find("LeftHand").GetComponent<MushroomCollectionVRSetController>().enabled = false;
-        player.transform.Find("RightHand").GetComponent<MushroomCollectionVRSetController>().enabled = false;
+        GameObject.Find("LeftHand").GetComponent<MushroomCollectionVRSetController>().enabled = false;
+        GameObject.Find("RightHand").GetComponent<MushroomCollectionVRSetController>().enabled = false;
     }
 
     private void EnableRestartGameVRSet()
