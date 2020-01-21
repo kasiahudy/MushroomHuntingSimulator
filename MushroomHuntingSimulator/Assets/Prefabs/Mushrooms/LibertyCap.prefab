@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a6996ca74df5e04ca25ee3d5280dc64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnProbability: 0.9
+  spawnProbability: 0.1
   playerHealthPointsDelta: -25
   edible: 0
   effectPrefab: {fileID: 7428202650855530006, guid: caee4522c707d944c8f9c1911c01cb71,
