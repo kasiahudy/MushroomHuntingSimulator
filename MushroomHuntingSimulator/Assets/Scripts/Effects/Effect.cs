@@ -74,7 +74,5 @@ public class Effect : MonoBehaviour, IEffect
     private void DestroySelf()
     {
         Destroy(this.gameObject);
-    }
-
-    
+    }    
 }

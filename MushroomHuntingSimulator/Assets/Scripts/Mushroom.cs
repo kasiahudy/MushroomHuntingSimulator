@@ -52,7 +52,8 @@ public class Mushroom : MonoBehaviour
     public void Collect()
     {
         AffectPlayerHealthPoints();
-        ActivateEffect();
+        if (!gameManager.HasGameEnded())
+            ActivateEffect();
         DestroySelf();
     }
 

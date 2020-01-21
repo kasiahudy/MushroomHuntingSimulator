@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1650586437587716155}
   m_Layer: 0
   m_Name: MajorImageDistortionEffect
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

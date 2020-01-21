@@ -74,6 +74,11 @@ public class GameManager : MonoBehaviour
         return mushrooms;
     }
 
+    public bool HasGameEnded()
+    {
+        return gameEnded;
+    }
+
     public void RestartGame()
     {
         if (gameEnded)
@@ -205,11 +210,7 @@ public class GameManager : MonoBehaviour
     {
         var effects = GameObject.FindGameObjectsWithTag(effectTag);
         foreach (var effect in effects)
-        {
             if (effect.GetComponent<Effect>().IsNegative())
-            {
                 Destroy(effect);
-            }
-        }
     }
 }

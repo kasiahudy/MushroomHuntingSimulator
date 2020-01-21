@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4154165783421362166}
   m_Layer: 0
   m_Name: IncreasePointsInEdibleDecreaseInNotEdibleEffect
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,3 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f474d257eef2345b5aa4db47ffbc39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durationSeconds: 10

@@ -23,7 +23,6 @@ public class IncreasePointsInEdibleDecreaseInNotEdibleEffect : Effect
             {
                 mushroom.changePlayerHealthPointsDelta(negativeChange);
             }
-
         }
         mushroomCollectInfo.setEffectInfo(effectInfo, IsNegative());
     }
