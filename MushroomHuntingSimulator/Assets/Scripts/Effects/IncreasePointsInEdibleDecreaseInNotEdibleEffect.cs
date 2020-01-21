@@ -5,7 +5,7 @@ using UnityEngine;
 public class IncreasePointsInEdibleDecreaseInNotEdibleEffect : Effect
 {
     private List<Mushroom> mushrooms;
-    private string effectInfo = "All edible mushrooms give 10% more hp and all not edible take 10% less!";
+    private string effectInfo = "All edible mushrooms give 10% more hp and all not edible take 10% less for 10s!";
 
     private float positiveChange = 1.5f;
     private float negativeChange = 0.5f;

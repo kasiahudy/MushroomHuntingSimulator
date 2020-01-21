@@ -5,7 +5,7 @@ using UnityEngine;
 public class HighlightEdibleMushroomsEffect : Effect
 {
     private List<Mushroom> mushrooms;
-    private string effectInfo = "All edible mushrooms are hightlighted!";
+    private string effectInfo = "All edible mushrooms are hightlighted fo 10s!";
 
     public override void Activate()
     {

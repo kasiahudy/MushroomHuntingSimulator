@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChangeAllMushroomsToIndistinguishableEffect : Effect
 {
     private List<Mushroom> mushrooms;
-    private string effectInfo = "Mushrooms are indistinguishable!";
+    private string effectInfo = "Mushrooms are indistinguishable for 10s!";
 
     public override void Activate()
     {

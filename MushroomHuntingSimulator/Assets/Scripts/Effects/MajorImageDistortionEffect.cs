@@ -1,20 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
-public class AddLightFogEffect : Effect
+public class MajorImageDistortionEffect : Effect
 {
-    private string effectInfo = "The fog will disappear in 10s";
+    public PostProcessingProfile ppProfile;
+    private string effectInfo = "The image distortion will disappear in 10s";
 
     public override void Activate()
     {
-        RenderSettings.fog = true;
+        ppProfile.colorGrading.enabled = true;
         mushroomCollectInfo.setEffectInfo(effectInfo, IsNegative());
     }
 
     public override void Deactivate()
     {
-        RenderSettings.fog = false;
+        ppProfile.colorGrading.enabled = false;
     }
 
     public override bool IsNegative()
