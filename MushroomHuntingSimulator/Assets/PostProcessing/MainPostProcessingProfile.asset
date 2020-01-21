@@ -122,22 +122,22 @@ MonoBehaviour:
         neutralWhiteClip: 10
       basic:
         postExposure: 0
-        temperature: 0
-        tint: 0
-        hueShift: 0
-        saturation: 1
-        contrast: 1
+        temperature: 8.4
+        tint: 60.7
+        hueShift: 15
+        saturation: 1.831
+        contrast: 1.196
       channelMixer:
-        red: {x: 1, y: 0, z: 0}
-        green: {x: 0, y: 1, z: 0}
-        blue: {x: 0, y: 0, z: 1}
-        currentEditingChannel: 0
+        red: {x: 0.53, y: -0.47, z: 0.13}
+        green: {x: 0.69, y: 0.8, z: -0.57}
+        blue: {x: -0.41, y: -0.76, z: 0.8}
+        currentEditingChannel: 1
       colorWheels:
         mode: 1
         log:
-          slope: {r: 1, g: 1, b: 1, a: 0}
-          power: {r: 1, g: 1, b: 1, a: 0}
-          offset: {r: 1, g: 1, b: 1, a: 0}
+          slope: {r: 1, g: 0.13840663, b: 0.45993802, a: 0}
+          power: {r: 0.93189454, g: 0.21104598, b: 1, a: 0}
+          offset: {r: 0.9089951, g: 0.16747606, b: 1, a: 0}
         linear:
           lift: {r: 0, g: 0, b: 0, a: 0}
           gamma: {r: 0, g: 0, b: 0, a: 0}
