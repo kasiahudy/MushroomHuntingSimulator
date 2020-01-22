@@ -52,6 +52,7 @@ public class Mushroom : MonoBehaviour
     public void Collect()
     {
         AffectPlayerHealthPoints();
+        DisplayAffectedHealthPoints();
         if (!gameManager.HasGameEnded())
             ActivateEffect();
         DestroySelf();
@@ -60,9 +61,19 @@ public class Mushroom : MonoBehaviour
     void Start()
     {
         LoadGameManager();
+        LoadMushroomCollectInfo();
         SetMushroomMaterial(mainMushroom);
-        mushroomCollectInfo = GameObject.Find("MushroomCollectInfo").GetComponent<MushroomCollectInfo>();
         originalPlayerHealthPointsDelta = playerHealthPointsDelta;
+    }
+
+    private void LoadGameManager()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    private void LoadMushroomCollectInfo()
+    {
+        mushroomCollectInfo = GameObject.Find("MushroomCollectInfo").GetComponent<MushroomCollectInfo>();
     }
 
     private void SetMushroomMaterial(GameObject mushroom)
@@ -71,15 +82,14 @@ public class Mushroom : MonoBehaviour
         mushroomMaterial = renderer.material;
     }
 
-    private void LoadGameManager()
-    {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
-
     private void AffectPlayerHealthPoints()
     {
-        mushroomCollectInfo.setHealthPointDeltaInfo(playerHealthPointsDelta);
         gameManager.UpdatePlayerHealthPoints(playerHealthPointsDelta);
+    }
+
+    private void DisplayAffectedHealthPoints()
+    {
+        mushroomCollectInfo.setHealthPointDeltaInfo(playerHealthPointsDelta);
     }
 
     private void ActivateEffect()
