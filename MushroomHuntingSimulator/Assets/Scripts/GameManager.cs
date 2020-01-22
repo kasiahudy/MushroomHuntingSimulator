@@ -26,12 +26,24 @@ public class GameManager : MonoBehaviour
     private List<Mushroom> mushrooms;
     private int playerHealthPoints;
     private int healthPointsReductionDelta;
+    private bool gameStarted;
     private bool gameEnded;
     private Stoper timePassedStoper = new Stoper();
     private CountdownTimer decreaseOfHealthPointsTimer = new CountdownTimer();
     private CountdownTimer increaseOfHealthPointsReductionDeltaTimer = new CountdownTimer();
     private TextMeshProUGUI healthBarText;
     private TextMeshProUGUI gameOverInfoText;
+
+    public void RestartGame()
+    {
+        if (!gameStarted)
+        {
+            InitGame();
+            gameStarted = true;
+        }            
+        else if (gameEnded)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
     public void UpdatePlayerHealthPoints(int delta)
     {
@@ -74,25 +86,25 @@ public class GameManager : MonoBehaviour
         return mushrooms;
     }
 
-    public bool HasGameEnded()
+    public bool HasGameStarted()
     {
-        return gameEnded;
+        return gameStarted;
     }
 
-    public void RestartGame()
+    public bool HasGameEnded()
     {
-        if (gameEnded)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        return gameStarted && gameEnded;
     }
 
     void Start()
     {
-        InitGame();
+        gameStarted = false;
+        gameEnded = false;
     }
 
     void Update()
     {
-        if (!gameEnded)
+        if (gameStarted && !gameEnded)
             PerformInGameManagement();
     }
 
@@ -100,6 +112,7 @@ public class GameManager : MonoBehaviour
     {
         SpawnMushrooms();
         SetInitialParamaterValues();
+        ActivatePlayerControl();
         StartTimeMeasurement();
         gameEnded = false;
     }
@@ -115,6 +128,11 @@ public class GameManager : MonoBehaviour
     {
         playerHealthPoints = maxPlayerHealthPoints;
         healthPointsReductionDelta = initialHealthPointsReductionDelta;
+    }
+
+    private void ActivatePlayerControl()
+    {
+        controlsManagerObject.GetComponent<ControlsManager>().ActivateControl();
     }
 
     private void StartTimeMeasurement()
@@ -196,7 +214,7 @@ public class GameManager : MonoBehaviour
     {
         ControlsManager controlsManager = controlsManagerObject.GetComponent<ControlsManager>();
         controlsManager.DeactivateControl();
-        controlsManager.ActivateRestartInput();
+        //controlsManager.ActivateRestartInput();
     }
 
     private void RemoveAllActiveEffects()
