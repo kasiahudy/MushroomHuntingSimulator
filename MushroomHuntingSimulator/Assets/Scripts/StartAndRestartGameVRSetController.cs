@@ -28,6 +28,6 @@ public class StartAndRestartGameVRSetController : MonoBehaviour
 
     private bool RestartButtonPressed()
     {
-        return startOrRestartPress.state;
+        return startOrRestartPress.lastStateUp;
     }
 }

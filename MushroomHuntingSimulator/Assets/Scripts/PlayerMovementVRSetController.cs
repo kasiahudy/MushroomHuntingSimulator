@@ -11,8 +11,6 @@ public class PlayerMovementVRSetController : MonoBehaviour
     [SerializeField]
     private float maxSpeed = 1.0f;
     [SerializeField]
-    private SteamVR_Action_Boolean movePress;
-    [SerializeField]
     private SteamVR_Action_Vector2 moveValue;
 
     private CharacterController characterController;
@@ -110,11 +108,6 @@ public class PlayerMovementVRSetController : MonoBehaviour
     private void ResetSpeed()
     {
         speed = 0;
-    }
-
-    private bool ButtonPressed()
-    {
-        return movePress.state;
     }
 
     private void ApplyMovement(Vector3 movement)
