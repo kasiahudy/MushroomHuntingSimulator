@@ -214,7 +214,6 @@ public class GameManager : MonoBehaviour
     {
         ControlsManager controlsManager = controlsManagerObject.GetComponent<ControlsManager>();
         controlsManager.DeactivateControl();
-        //controlsManager.ActivateRestartInput();
     }
 
     private void RemoveAllActiveEffects()

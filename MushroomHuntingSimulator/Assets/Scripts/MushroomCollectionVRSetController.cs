@@ -33,7 +33,6 @@ public class MushroomCollectionVRSetController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        //TODO prawdopodobnie rozwiaze to problemy z naglym zanikiem zaznaczenia, przetestowac w labie
         if (currentMushroom != null && CollidedWithMushroom(other))
         {
             RemoveHighlightForCurrentMushroom();
